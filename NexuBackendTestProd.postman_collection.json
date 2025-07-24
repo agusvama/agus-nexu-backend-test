@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "56c5cf71-79ab-4a17-9d12-f9a179c2b496",
+		"name": "NexuBackendTestProd",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14604201"
+	},
+	"item": [
+		{
+			"name": "Brands",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/brands"
+			},
+			"response": []
+		},
+		{
+			"name": "Model",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/brands/7/models"
+			},
+			"response": []
+		},
+		{
+			"name": "Models",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/models"
+			},
+			"response": []
+		},
+		{
+			"name": "Brands",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand\": {\n        \"name\": \"AgusVama\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/brands"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://agus-nexu-backend.onrender.com",
+			"type": "string"
+		}
+	]
+}

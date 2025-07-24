@@ -1,111 +1,124 @@
-# Nexu Backend Coding Exercise
-Our goal is to give you a small coding challenge that gives you a chance to show off your skills while giving you an idea of some of the problems that you may encounter at Nexu. We know you're busy with life, so we hope that you can spend around 2 hours working through this exercise. We don't expect you to finish in 2 hours, so don't worry if you can't. Submit what you have along with some notes on your thoughts and how you would proceed if you had more time. Most importantly, try to have some fun with it!
+# Nexu Backend Challenge 🚗
 
-## Overview
-You just got hired to join the *cool* engineering team at *Nexu*! The first story in your sprint backlog is to build a backend application for an already existing frontend. The frontend needs the next routes:
+This is a backend developed using Ruby on Rails as part of a technical assesment for Nexu.
+It exposes an API with two tables, Brands and Models.
+I included a Postman collection for easily testing on production. Find it in this repository's root (NexuBackendTestProd.postman_collection.json)
 
+## Coverage
+- [ ] Endpoints
+    - [x] GET /brands
+    - [x] GET /brands/:id/models
+    - [x] GET /models
+    - [x] POST /brands
+    - [ ] POST /brands/:id/models
+    - [ ] PUT /models/:id
+- [x] Unit tests for implemented endpoints
+- [x] Linted code
+- [x] Unique brand's names
+- [x] Brand's average price is the average of their models' average prices
+- [x] Database populated with the sample json
+- [x] Bonus: App deployed -> https://agus-nexu-backend.onrender.com
 
-```
-                              GET    /brands
-                              GET    /brands/:id/models
-                              POST   /brands
-                              POST   /brands/:id/models
-                              PUT    /models/:id
-                              GET    /models
-```
+## Feedback
 
-#### GET /brands
+This was a nice exercise to code. I enjoyed the time I put into writing each part of it. I had fun and I'm proud of the result.
+I consider it a good chanllenge to apply for the software engineer position at Nexu.
 
-List all brands 
+If I had more time I'd:
+- [ ] Fix the Rubocop offenses. I consider they are not too heavy, just a matter of aligning to a standard code base.
+- [ ] Add a validation layer for requests authentication.
+- [ ] Implement a callback to update a brand's new average price when a new model is added.
+
+## 🛠  Stack
+
+- Ruby on Rails (7.1.5.1)
+- PostgreSQL (v15)
+- FactoryBot + RSpec
+- Rubocop
+- Render.com (app host)
+
+## Deploy
+
+This app is available at [Render](https://render.com/).
+
+## Available Endpoints
+
+Base URL: https://agus-nexu-backend.onrender.com
+
+### `GET /brands`
+
+Lists all brands.
+
+[Brands](https://agus-nexu-backend.onrender.com/models)
+
+---
+
+### `GET /brands/:id/models`
+
+Lists all models from the solicited brand.
+
+[Brand's Models](https://agus-nexu-backend.onrender.com/models)
+
+---
+
+### `GET /models`
+
+Lists all models.
+
+[Models](https://agus-nexu-backend.onrender.com/models)
+
+---
+
+### `POST /brands`
+
+Creates a new Brand. Name must be unique.
+
+#### Body (JSON):
+
 ```json
-[
-  {"id": 1, "nombre": "Acura", "average_price": 702109},
-  {"id": 2, "nombre": "Audi", "average_price": 630759},
-  {"id": 3, "nombre": "Bentley", "average_price": 3342575},
-  {"id": 4, "nombre": "BMW", "average_price": 858702},
-  {"id": 5, "nombre": "Buick", "average_price": 290371},
-  "..."
-]
-```
-The average price of each brand is the average of its models average prices
-
-#### GET /brands/:id/models
-
-List all models of the brand
-```json
-[
-  {"id": 1, "name": "ILX", "average_price": 303176},
-  {"id": 2, "name": "MDX", "average_price": 448193},
-  {"id": 1264, "name": "NSX", "average_price": 3818225},
-  {"id": 3, "name": "RDX", "average_price": 395753},
-  {"id": 354, "name": "RL", "average_price": 239050}
-]
+{
+  "name": "BYD",
+  "average_price": 1000000
+}
 ```
 
-#### POST /brands
-
-You may add new brands. A brand name must be unique.
+It returns an error message if the brand already exists.
 
 ```json
-{"name": "Toyota"}
+{
+    "errors": [
+        "Name has already been taken"
+    ]
+}
 ```
 
-If a brand name is already in use return a response code and error message reflecting it.
+## Tests
 
-
-#### POST /brands/:id/models
-
-You may add new models to a brand. A model name must be unique inside a brand.
-
-```json
-{"name": "Prius", "average_price": 406400}
-```
-If the brand id doesn't exist return a response code and error message reflecting it.
-
-If the model name already exists for that brand return a response code and error message reflecting it.
-
-Average price is optional, if supply it must be greater than 100,000.
-
-
-#### PUT /models/:id
-
-You may edit the average price of a model.
-
-```json
-{"average_price": 406400}
-```
-The average_price must be greater then 100,000.
-
-#### GET /models?greater=&lower=
-
-List all models. 
-If greater param is included show all models with average_price greater than the param
-If lower param is included show all models with average_price lower than the param
-```
-# /models?greater=380000&lower=400000
-```
-```json
-[
-  {"id": 1264, "name": "NSX", "average_price": 3818225},
-  {"id": 3, "name": "RDX", "average_price": 395753}
-]
+```bash
+bundle exec rspec
 ```
 
-- Code all the endpoints and the logic needed
+## Local execution
 
-- Create a database to store this information
+Install dependencies
+- Ruby 3.2.2
+- Postgres 15
 
-- Populate the database from the json included in this repository
+Install gems
+```
+bundle install
+```
 
-## Requirements
-- your code should be linted
-- your code should include at least a couple of tests
-- your code should include a `README.md` file in the root with instructions for building, running, and testing. It can also include notes on your thought process and any issues you may have run into.
+Create, migrate and populate the database
+```
+rails db:create
+rails db:migrate
+rails db:seed
+```
 
-## Submission
-Please upload this repository to Github and submit to @remigioamc when complete. Also, we would love your feedback, so feel free to share your thoughts on the exercise!
+Run the server and go to localhost:3000. You should see a welcoming page. You can either visit the endpoints from your browser or use the Postman collections included in this repository.
+```
+rails server
+```
 
-## Bonus
-Deploy your application so we can test it against our frontend. Share the URL.
-
-
+Built with love by: [Agus](https://github.com/agusvama)
