@@ -5,7 +5,12 @@ class ModelsController < ApplicationController
   def index
     @models = Model.all
 
-    render json: @models
+    if params[:brand_id]
+      brand = Brand.find(params[:brand_id])
+      render json: brand.models
+    else
+      render json: @models
+    end
   end
 
   # GET /models/1
