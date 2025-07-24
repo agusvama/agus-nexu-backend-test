@@ -82,3 +82,4 @@ production:
   database: nexu_api_production
   username: nexu_api
   password: <%= ENV["NEXU_API_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
