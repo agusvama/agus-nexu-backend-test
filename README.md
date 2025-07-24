@@ -49,7 +49,7 @@ Base URL: https://agus-nexu-backend.onrender.com
 
 Lists all brands.
 
-[Brands](https://agus-nexu-backend.onrender.com/models)
+[Brands](https://agus-nexu-backend.onrender.com/brands)
 
 ---
 
@@ -57,7 +57,7 @@ Lists all brands.
 
 Lists all models from the solicited brand.
 
-[Brand's Models](https://agus-nexu-backend.onrender.com/models)
+[Brand's Models](https://agus-nexu-backend.onrender.com/brands/7/models) <- example for Brand: Chevrolet
 
 ---
 
